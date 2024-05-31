@@ -1,3 +1,4 @@
+
 import React, { useContext } from 'react';
 import { GlobalContext } from '../context/GlobalContext';
 
@@ -44,4 +45,3 @@ export function TablaPendientes({ id, codigo, fecha, aula, grupo, ordenador, des
             </tbody>
         </table>
     );
-}

@@ -1,3 +1,4 @@
+
 import React, { useContext } from 'react';
 import { GlobalContext } from '../context/GlobalContext';
 
@@ -42,4 +43,3 @@ export function TablaResueltos({ id, codigo, fecha, fecharesuelto, aula, grupo, 
             </table>
         </div>
     );
-}
