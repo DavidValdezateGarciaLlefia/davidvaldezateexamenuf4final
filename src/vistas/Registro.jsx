@@ -13,4 +13,3 @@ export function Registro() {
           </form>
       </div>
   );
-}
