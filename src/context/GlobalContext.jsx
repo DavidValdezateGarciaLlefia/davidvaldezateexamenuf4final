@@ -16,15 +16,28 @@ export const GlobalContextProvider = ({ children }) => {
 
                 setDatos({ ticketsResueltos, ticketsPendientes });
             } catch (error) {
-                console.error('Error fetching tickets:', error);
+                console.error('Error al obtener los tickets:', error);
             }
         };
 
         fetchTickets();
     }, []);
 
+    const borraTicket = (codigo, tipo) => {
+        fetch(`https://davidvaldezatejsonserver.vercel.app/${tipo}/${codigo}`, {
+            method: 'DELETE'
+        })
+            .then(() => {
+                setDatos(prevDatos => ({
+                    ...prevDatos,
+                    [tipo]: prevDatos[tipo].filter(ticket => ticket.codigo !== codigo)
+                }));
+            })
+            .catch(error => console.error('Error al borrar el ticket:', error));
+    };
+
     return (
-        <GlobalContext.Provider value={{ datos, setDatos }}>
+        <GlobalContext.Provider value={{ datos, setDatos, borraTicket }}>
             {children}
         </GlobalContext.Provider>
     );
