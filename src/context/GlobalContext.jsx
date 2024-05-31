@@ -69,8 +69,26 @@ export const GlobalContextProvider = ({ children }) => {
         }
     };
 
+    const agregarTicketPendiente = (nuevoTicket) => {
+        fetch('https://davidvaldezatejsonserver.vercel.app/ticketsPendientes', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(nuevoTicket)
+        })
+            .then(response => response.json())
+            .then(data => {
+                setDatos(prevDatos => ({
+                    ...prevDatos,
+                    ticketsPendientes: [...prevDatos.ticketsPendientes, data]
+                }));
+            })
+            .catch(error => console.error('Error al agregar el ticket:', error));
+    };
+
     return (
-        <GlobalContext.Provider value={{ datos, setDatos, borraTicket, resolverTicket }}>
+        <GlobalContext.Provider value={{ datos, setDatos, borraTicket, resolverTicket, agregarTicketPendiente }}>
             {children}
         </GlobalContext.Provider>
     );

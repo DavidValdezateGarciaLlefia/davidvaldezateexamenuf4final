@@ -10,6 +10,7 @@ export function Header() {
                         <Link to="/" className="btn btn-secondary ms-2">PANEL</Link>
                         <Link to="/login" className="btn btn-secondary ms-2">LOGIN</Link>
                         <Link to="/registro" className="btn btn-secondary ms-2">REGISTRO</Link>
+                        <Link to="/crear" className="btn btn-secondary ms-2">CREAR</Link>
                     </div>
                     <div>
                         <span>administrador@fpllefia.com</span>
