@@ -1,4 +1,3 @@
-
 import { GlobalContext } from "../context/GlobalContext";
 import { TablaPendientes } from "../componentes/TablaPendientes";
 import { TablaResueltos } from "../componentes/TablaResueltos";
@@ -13,7 +12,8 @@ export function Panel() {
             <h2 className="mt-5">Tickets pendientes</h2>
             {datos.ticketsPendientes.map(ticket => (
                 <TablaPendientes
-                    key={ticket.codigo}
+                    key={ticket.id}
+                    id={ticket.id}
                     codigo={ticket.codigo}
                     fecha={ticket.fecha}
                     aula={ticket.aula}
@@ -27,10 +27,11 @@ export function Panel() {
             <h2 className="mt-5">Tickets resueltos</h2>
             {datos.ticketsResueltos.map(ticket => (
                 <TablaResueltos
-                    key={ticket.codigo}
+                    key={ticket.id}
+                    id={ticket.id}
                     codigo={ticket.codigo}
                     fecha={ticket.fecha}
-                    fecha_resuelto={ticket.fecha_resuelto}
+                    fecharesuelto={ticket.fecha_resuelto}
                     aula={ticket.aula}
                     grupo={ticket.grupo}
                     ordenador={ticket.ordenador}

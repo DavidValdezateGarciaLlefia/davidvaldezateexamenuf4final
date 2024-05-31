@@ -23,21 +23,54 @@ export const GlobalContextProvider = ({ children }) => {
         fetchTickets();
     }, []);
 
-    const borraTicket = (codigo, tipo) => {
-        fetch(`https://davidvaldezatejsonserver.vercel.app/${tipo}/${codigo}`, {
+    const borraTicket = (id, tipo) => {
+        fetch(`https://davidvaldezatejsonserver.vercel.app/${tipo}/${id}`, {
             method: 'DELETE'
         })
             .then(() => {
                 setDatos(prevDatos => ({
                     ...prevDatos,
-                    [tipo]: prevDatos[tipo].filter(ticket => ticket.codigo !== codigo)
+                    [tipo]: prevDatos[tipo].filter(ticket => ticket.id !== id)
                 }));
             })
             .catch(error => console.error('Error al borrar el ticket:', error));
     };
 
+    const resolverTicket = (id) => {
+        const ticketPendiente = datos.ticketsPendientes.find(ticket => ticket.id === id);
+        if (ticketPendiente) {
+            const fechaActual = new Date();
+            const dia = String(fechaActual.getDate()).padStart(2, '0');
+            const mes = String(fechaActual.getMonth() + 1).padStart(2, '0');
+            const año = fechaActual.getFullYear();
+            const fechaFormateada = `${dia}/${mes}/${año}`;
+
+            const ticketResuelto = { ...ticketPendiente, fecha_resuelto: fechaFormateada };
+
+            setDatos(prevDatos => ({
+                ...prevDatos,
+                ticketsPendientes: prevDatos.ticketsPendientes.filter(ticket => ticket.id !== id),
+                ticketsResueltos: [...prevDatos.ticketsResueltos, ticketResuelto]
+            }));
+
+            fetch(`https://davidvaldezatejsonserver.vercel.app/ticketsPendientes/${id}`, {
+                method: 'DELETE'
+            })
+            .then(() => {
+                return fetch('https://davidvaldezatejsonserver.vercel.app/ticketsResueltos', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(ticketResuelto)
+                });
+            })
+            .catch(error => console.error('Error al resolver el ticket:', error));
+        }
+    };
+
     return (
-        <GlobalContext.Provider value={{ datos, setDatos, borraTicket }}>
+        <GlobalContext.Provider value={{ datos, setDatos, borraTicket, resolverTicket }}>
             {children}
         </GlobalContext.Provider>
     );
