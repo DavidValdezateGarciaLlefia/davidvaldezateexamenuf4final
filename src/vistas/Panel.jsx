@@ -10,6 +10,21 @@ export function Panel() {
         <div>
             <h1>Administración de incidencias</h1>
             <h2 className="mt-5">Tickets pendientes</h2>
+            <table className="table mt-4">
+            <thead>
+                <tr>
+                    <th>Código</th>
+                    <th>Fecha</th>
+                    <th>Aula</th>
+                    <th>Grupo</th>
+                    <th>Ordenador</th>
+                    <th>Descripción</th>
+                    <th>Alumno</th>
+                    <th>Resolver</th>
+                    <th>Comentarios</th>
+                    <th>Eliminar</th>
+                </tr>
+            </thead>
             {datos.ticketsPendientes.map(ticket => (
                 <TablaPendientes
                     key={ticket.id}
@@ -23,8 +38,23 @@ export function Panel() {
                     alumno={ticket.alumno}
                 />
             ))}
-            
+            </table>
             <h2 className="mt-5">Tickets resueltos</h2>
+            <table className="table mt-4">
+                <thead>
+                    <tr>
+                        <th>Código</th>
+                        <th>Fecha</th>
+                        <th>Fecha resuelto</th>
+                        <th>Aula</th>
+                        <th>Grupo</th>
+                        <th>Ordenador</th>
+                        <th>Descripción</th>
+                        <th>Alumno</th>
+                        <th>Comentarios</th>
+                        <th>Eliminar</th>
+                    </tr>
+                </thead>
             {datos.ticketsResueltos.map(ticket => (
                 <TablaResueltos
                     key={ticket.id}
@@ -39,6 +69,7 @@ export function Panel() {
                     alumno={ticket.alumno}
                 />
             ))}
+            </table>
         </div>
     );
 }

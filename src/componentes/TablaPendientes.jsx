@@ -13,21 +13,7 @@ export function TablaPendientes({ id, codigo, fecha, aula, grupo, ordenador, des
     };
 
     return (
-        <table className="table mt-4">
-            <thead>
-                <tr>
-                    <th>Código</th>
-                    <th>Fecha</th>
-                    <th>Aula</th>
-                    <th>Grupo</th>
-                    <th>Ordenador</th>
-                    <th>Descripción</th>
-                    <th>Alumno</th>
-                    <th>Resolver</th>
-                    <th>Comentarios</th>
-                    <th>Eliminar</th>
-                </tr>
-            </thead>
+       
             <tbody>
                 <tr>
                     <td>{codigo}</td>
@@ -45,6 +31,5 @@ export function TablaPendientes({ id, codigo, fecha, aula, grupo, ordenador, des
                     <td><button className="btn btn-danger" title="Eliminar ticket" onClick={controladorDelete}><i className="bi bi-trash3"></i></button></td>
                 </tr>
             </tbody>
-        </table>
     );
 }
